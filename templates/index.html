@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Recommendation System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Product Recommendation</h2>
+        <form id="recommendation-form">
+            <label for="username">Enter Username:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+    document.getElementById('recommendation-form').onsubmit = async function(event) {
+        event.preventDefault();
+        let username = document.getElementById('username').value;
+        let resp = await fetch('/recommend', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: 'username=' + encodeURIComponent(username)
+        });
+        let data = await resp.json();
+
+        const resultDiv = document.getElementById('result');
+        if (data.success) {
+            resultDiv.innerHTML = "<h3>Top Recommendations for " + data.username + ":</h3>" +
+                "<ol>" + data.recommendations.map(item =>
+                    `<li>${item.product_name} (${item.positive_sentiment_percentage.toFixed(2)}% positive)</li>`
+                ).join('') + "</ol>";
+        } else {
+            resultDiv.innerHTML = "<span style='color:red'>" + data.error + "</span>";
+        }
+    }
+    </script>
+</body>
+</html>
