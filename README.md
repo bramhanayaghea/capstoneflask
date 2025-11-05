@@ -36,6 +36,7 @@ product-recommendation-flask/
 │
 ├── static/
 │   └── style.css         # (Optional) Any CSS for frontend
+│   ├── flask_run.jpg     # flask run image reference
 │
 ├── notebooks/
 │   └── SBPRS_Bramhanayaghe_Arumugam.ipynb
@@ -52,7 +53,7 @@ product-recommendation-flask/
 1. **Clone this repository:**
 
 ```sh
-git clone https://github.com/your-username/product-recommendation-flask.git
+git clone https://github.com/bramhanayaghea/capstoneflask.git
 cd capstoneflask
 
 2. **Create and activate a virtual environment:**
@@ -118,6 +119,7 @@ heroku open
 - **Sentiment Model:** Best performing NLP classifier (train process in `notebooks/SBPRS_Bramhanayaghe_Arumugam.ipynb`).
 - **Recommendation System:** User-item utility matrix (collaborative filtering), persisted as `user_final_rating.pkl`.
 - **TF-IDF Vectorizer:** Fitted on training data, transforms review text at prediction time.
+![Alt Text](static/flask_run.png)
 
 ***
 
